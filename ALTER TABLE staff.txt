@@ -1,0 +1,12 @@
+ALTER TABLE staff 
+ADD COLUMN twofa_secret VARCHAR(255) DEFAULT NULL,
+ADD COLUMN twofa_enabled BOOLEAN DEFAULT FALSE,
+MODIFY COLUMN password VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+
+
+-- Agregar columna 'rol' a la tabla staff con valor predeterminado 'usuario'
+ALTER TABLE staff 
+ADD COLUMN rol VARCHAR(20) NOT NULL DEFAULT 'usuario';
+
+-- Opcional: Crear índice para mejor performance si hay muchos usuarios
+CREATE INDEX idx_staff_rol ON staff(rol);
