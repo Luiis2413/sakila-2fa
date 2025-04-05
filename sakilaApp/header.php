@@ -34,33 +34,40 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../categories/index.php">Categories</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../customers/index.php">Customers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../inventories/index.php">Inventories</a>
-                    </li>
+                   
                     <li class="nav-item">
                         <a class="nav-link" href="../films/index.php">Films</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../store/index.php">Store</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../manager/index.php">Manager</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../addresses/cityCountry.php">City/Contry</a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../dashboard.php">Dashboard</a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../logout.php">Cerrar sesión</a>
-                    </li>
-                    
+                    <?php 
+if ($_SESSION['rol-acces'] != 'usuario') {
+    echo '
+    <li class="nav-item">
+    <a class="nav-link" href="../customers/index.php">Customers</a>
+     </li>
+     <li class="nav-item">
+        <a class="nav-link" href="../inventories/index.php">Inventories</a>
+    </li>    
+   ';
+}
+
+if ($_SESSION['rol-acces'] == 'admin') {
+    echo '
+    <li class="nav-item">
+        <a class="nav-link" href="../manager/index.php">Manager</a>
+    </li>
+   ';
+}
+?>
+ </li>
+    <li class="nav-item">
+        <a class="nav-link" href="../../dashboard.php">Dashboard</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="../../logout.php">Cerrar sesión</a>
+    </li>
                 </ul>
             </div>
         </div>

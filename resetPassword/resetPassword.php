@@ -2,7 +2,7 @@
 // check_user.php
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', 'w2VPaPG£X,F\_35Y?#u9p[In@8.ky');
+define('DB_PASS', '');
 define('DB_NAME', 'sakila');
 
 // Conexión a la base de datos

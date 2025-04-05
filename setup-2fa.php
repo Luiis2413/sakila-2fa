@@ -19,8 +19,8 @@ $user = getUserById($userId);
 if (empty($user['twofa_secret'])) {
     $secret = $ga->createSecret();
     
-    // Guardar el secreto en la base de datos
-    $stmt = $pdo->prepare("UPDATE users SET twofa_secret = ? WHERE id = ?");
+    // Guardar el secreto en la base de datos (usando staff_id)
+    $stmt = $pdo->prepare("UPDATE staff SET twofa_secret = ? WHERE staff_id = ?");
     $stmt->execute([$secret, $userId]);
 } else {
     $secret = $user['twofa_secret'];
@@ -34,6 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($ga->verifyCode($secret, $code, 2)) {
         $success = 'Autenticación en dos pasos configurada correctamente!';
         $_SESSION['2fa_verified'] = true;
+        
+        // Actualizar twofa_enabled a 1 cuando se verifica correctamente
+        $stmt = $pdo->prepare("UPDATE staff SET twofa_enabled = 1 WHERE staff_id = ?");
+        $stmt->execute([$userId]);
+        
         header('Refresh: 2; URL=dashboard.php');
     } else {
         $error = 'Código incorrecto. Intenta nuevamente.';
@@ -80,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <form method="POST" class="mt-3">
                                 <div class="mb-3">
                                     <input type="text" class="form-control text-center" id="code" name="code" 
-                                           placeholder="123456" required autofocus>
+                                           placeholder="123456" required autofocus maxlength="6" pattern="\d{6}">
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100">Verificar y Activar 2FA</button>
                             </form>

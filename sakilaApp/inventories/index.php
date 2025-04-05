@@ -52,7 +52,7 @@ include '../header.php';
 </form>
 
 <!-- Botón para agregar nuevo inventario (visible si no tiene rol o es diferente a usuario) -->
-<?php if ($_SESSION['rol-acces'] == 'admin'): ?>
+<?php if ($_SESSION['rol-acces'] == 'admin'|| $_SESSION['rol-acces'] == 'empleado'): ?>
     <a href="create.php" class="btn btn-primary mb-3">Add New Inventory</a>
 <?php endif; ?>
 
@@ -75,7 +75,7 @@ include '../header.php';
                 <td><?= $row['store_id'] ?></td>
                 <td><?= $row['last_update'] ?></td>
                 <td>
-                    <?php if ($_SESSION['rol-acces'] == 'admin'): ?>
+                    <?php if ($_SESSION['rol-acces'] == 'admin'|| $_SESSION['rol-acces'] == 'empleado'): ?>
                         <a href="edit.php?id=<?= $row['inventory_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
                         <a href="delete.php?id=<?= $row['inventory_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
                     <?php else: ?>

@@ -66,6 +66,8 @@ $staffMembers = $stmt->fetchAll();
                                 <select name="new_role" class="form-select" required>
                                     <option value="usuario">Usuario</option>
                                     <option value="admin">Administrador</option>
+                                    <option value="empleado">Empleado</option>
+
                                 </select>
                             </div>
                             
